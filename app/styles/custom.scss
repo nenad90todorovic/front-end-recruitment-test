@@ -45,7 +45,11 @@
 	padding-left: 30px;
 	padding-right: 15px;
 	margin-top: -10px;
-	
+
+	> div {
+		position: relative;
+	}
+
 	// fields
 	label {
 		display: block;
@@ -86,6 +90,15 @@
 		&::ms-expand {
 			display: none;
 		}
+	}
+
+	// error msg
+	.error_msg {
+		color: #303F9F;
+		position: absolute;
+		font-size: 13px;
+		bottom: -18px;
+		left: 12px;
 	}
 }	
 
@@ -294,6 +307,10 @@ main.mdl-layout__content.checkout_wrapper {
 				// user's email
 				.user_email {
 					clear: both;
+
+					.error_msg {
+						bottom: -35px;
+					}
 				}
 
 				// user's country
@@ -348,6 +365,10 @@ main.mdl-layout__content.checkout_wrapper {
 					float: left;
 					box-sizing: border-box;
 					padding-right: 5px;
+
+					span.error_msg {
+						bottom: 2px;
+					}
 				}
 
 				.icon-question-circle-o {
@@ -405,6 +426,11 @@ main.mdl-layout__content.checkout_wrapper {
 
 				&:hover {
 					background-color: rgba(107, 212, 0, .8);
+				}
+
+				&[ disabled ] {
+					background-color: #c2bfbf;
+					border-color: transparent;
 				}
 			}
 

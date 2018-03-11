@@ -1,11 +1,18 @@
 <!doctype html>
-<html lang="">
+<html lang="" ng-app='myApp'>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Starter Kit</title>
+    
+    <!-- angular flash bug removal -->
+    <style type="text/css" media="screen">
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+       display: none !important;
+    }
+    </style>
 
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
@@ -53,7 +60,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/custom.css">
   </head>
-  <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+  <body ng-cloak ng-controller='ValidationCtrl' class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
@@ -82,7 +89,9 @@
         <!-- checkout -->
         <div class="mdl-layout__tab-panel is-active" id="checkout">
           <!-- checkout form -->
-          <form action="#" id="checkout_form">
+          <form method="POST" name="checkout_form" 
+           action="#" id="checkout_form"
+           ng-submit='pass()'>
             <!-- personal -->
             <section class="personal" id="personal_info">
               <!-- form info -->
@@ -94,21 +103,43 @@
                 <div class="first_name">
                   <label for="first_name">First name</label>
                   <input id="first_name" type="text" 
+                   required ng-model='first_name' 
+                   ng-pattern='/[a-zA-Z]+/'
                    name="first_name" placeholder="Elon">
+                  <span class="error_msg"
+                   ng-show="checkout_form.first_name.$dirty 
+                   && checkout_form.first_name.$invalid">   
+                      Please enter your first name.  
+                  </span>                   
                 </div>
 
                 <!-- last name -->
                 <div class="last_name">
                   <label for="last_name">Last name</label>
                   <input id="last_name" type="text"
+                   required ng-model='last_name'
+                   ng-pattern='/[a-zA-Z]+/'
                    name="last_name" placeholder="Musk">
+                  <span class="error_msg"
+                   ng-show="checkout_form.last_name.$dirty 
+                   && checkout_form.last_name.$invalid">   
+                      Please enter your last name.  
+                  </span>
                 </div>
 
                 <!-- user;s email -->
                 <div class="user_email">
-                  <label for="user_email">Email</label>
-                  <input id="user_email" type="email"
-                   placeholder="elon@spacex.com">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" name="email" ng-model="email" 
+                   required placeholder="elon@placex.com">
+                  <p class="error_msg" ng-show="checkout_form.email.$dirty && checkout_form.email.$invalid">
+                    <span ng-show="checkout_form.email.$error.required">
+                      Please enter your email.
+                    </span>
+                    <span ng-show="checkout_form.email.$error.email">
+                      Please enter a valid email.
+                    </span>
+                  </p>
                 </div>
                 
                 <!-- user's country -->
@@ -124,16 +155,30 @@
                 <div class="postal_code">
                   <label for="postal_code">Postal Code</label>
                   <input id="postal_code" type="text"
-                   pattern="\d{5}" name="postal_code"  
+                   required maxlength="5" 
+                   ng-model='postal_code'
+                   ng-pattern="/\d{5}/" name="postal_code"  
                    placeholder="10001">
+                  <span class="error_msg"
+                   ng-show="checkout_form.postal_code.$dirty 
+                   && checkout_form.postal_code.$invalid">   
+                      Please enter a valid postal code.  
+                  </span>                 
                 </div>
 
                 <!-- phone number -->
                 <div class="phone_number">
                   <label for="phone_number">Phone Number</label>
                   <input id="phone_number" 
-                   pattern="[\(]\d{3}[\)] \d{3}[\-]\d{2}[\-]\d{2}"
+                   name='phone_number' maxlength="15" 
+                   required ng-model='phone_number'
+                   ng-pattern="/[\(]\d{3}[\)] \d{3}[\-]\d{2}[\-]\d{2}/"
                    type="tel" placeholder="(212) 692-93-92">
+                  <span class="error_msg"
+                   ng-show="checkout_form.phone_number.$dirty 
+                   && checkout_form.phone_number.$invalid">   
+                      Please enter a valid phone number.
+                  </span>                   
                 </div>
               </div>
             </section>
@@ -151,33 +196,52 @@
                 <div class="credit_card">
                    <label for="credit_card">Credit Card Number</label>
                    <input id="credit_card" type="text" 
-                    placeholder="0000-0000-0000-0000" 
-                    pattern="\d{4}[\-]\d{4}[\-]\d{4}[\-]\d{4}">
+                    required name="credit_card" ng-model='credit_card'
+                    placeholder="0000-0000-0000-0000" maxlength="19" 
+                    ng-pattern="/\d{4}[\-]\d{4}[\-]\d{4}[\-]\d{4}/">
+                   <span class="error_msg"
+                     ng-show="checkout_form.credit_card.$dirty 
+                     && checkout_form.credit_card.$invalid">   
+                        Please enter a valid card number.
+                   </span>
                 </div>
 
                 <!-- security code -->
                 <div class="security_code">
                   <label for="security_code">Security code</label>
                   <input type="text" id="security_code"
+                   required ng-model='security_code'
                    name="security_code" placeholder="***"
-                   pattern="\d{3}">
+                   ng-pattern="/\d{3}/" maxlength="3">
                    <i title="Last 3 digits from the back of your card" 
                     class="icon icon-question-circle-o">&nbsp;</i>
+                  <span class="error_msg"
+                     ng-show="checkout_form.security_code.$dirty 
+                     && checkout_form.security_code.$invalid">   
+                        Please enter a valid security code.
+                   </span>
                 </div>
 
                 <!-- expiration date -->
                 <div class="expiration_date">
                   <label for="expiration_date">Expiration date</label>
                   <input type="text" id="expiration_date" name="expiration_date" 
-                   pattern="(0[1-9]|1[012])[- /.](18|19|2\d)"
-                   placeholder="MM / YY">
+                   ng-pattern="/(0[1-9]|1[012])[- /.](18|19|2\d)/" maxlength="5" 
+                   ng-model='expiration_date' required placeholder="MM/YY">
+                  <span class="error_msg"
+                     ng-show="checkout_form.expiration_date.$dirty 
+                     && checkout_form.expiration_date.$invalid">   
+                        Please enter a valid expiration date.
+                   </span>
                 </div>
               </div>
             </section>
 
             <!-- submit -->
             <div class="submit">
-              <button type="submit">
+              <button type="submit" 
+               ng-disabled='checkout_form.$dirty && checkout_form.$invalid ||  
+               checkout_form.$dirty && checkout_form.$invalid'>
                 <i class="icon icon-basket">&nbsp;</i>Complete Purchase
               </button>
             </div>
@@ -295,8 +359,12 @@
         </footer>
       </main>
     </div>
-
+  
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+    <!-- angular - for form validation -->
+    <script src="https://code.angularjs.org/1.6.9/angular.min.js"></script>
+    <!-- validation script -->
+    <script src="scripts/validation.js"></script>
     <!-- build:js scripts/main.min.js -->
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
