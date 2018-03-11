@@ -76,36 +76,39 @@
           </button>
         </div> 
       </header>
-      <main class="mdl-layout__content">
-        
-
+      
+      <!-- checkout wrapper -->
+      <main class="mdl-layout__content checkout_wrapper">
         <!-- checkout -->
         <div class="mdl-layout__tab-panel is-active" id="checkout">
           <!-- checkout form -->
           <form action="#" id="checkout_form">
             <!-- personal -->
-            <section class="personal">
+            <section class="personal" id="personal_info">
               <!-- form info -->
-              <h3><span class="numbering">1</span>Personal Information</h3>
+              <h3><span class="numbering"><b>1</b></span>Personal Information</h3>
     
               <!-- form fields -->
               <div class="form_fields">
                 <!-- first name -->
                 <div class="first_name">
                   <label for="first_name">First name</label>
-                  <input type="text" name="first_name" placeholder="Elon">
+                  <input id="first_name" type="text" 
+                   name="first_name" placeholder="Elon">
                 </div>
 
                 <!-- last name -->
                 <div class="last_name">
                   <label for="last_name">Last name</label>
-                  <input type="text" name="last_name" placeholder="Musk">
+                  <input id="last_name" type="text"
+                   name="last_name" placeholder="Musk">
                 </div>
 
                 <!-- user;s email -->
                 <div class="user_email">
                   <label for="user_email">Email</label>
-                  <input type="email" placeholder="elon@spacex.com">
+                  <input id="user_email" type="email"
+                   placeholder="elon@spacex.com">
                 </div>
                 
                 <!-- user's country -->
@@ -120,97 +123,121 @@
                 <!-- postal code -->
                 <div class="postal_code">
                   <label for="postal_code">Postal Code</label>
-                  <input type="text" pattern="\d{5}" name="postal_code"  
+                  <input id="postal_code" type="text"
+                   pattern="\d{5}" name="postal_code"  
                    placeholder="10001">
                 </div>
 
                 <!-- phone number -->
                 <div class="phone_number">
                   <label for="phone_number">Phone Number</label>
-                  <input pattern="[\(]\d{3}[\)] \d{3}[\-]\d{2}[\-]\d{2}"
-                   type="tel" value="(212) 692-93-92">
+                  <input id="phone_number" 
+                   pattern="[\(]\d{3}[\)] \d{3}[\-]\d{2}[\-]\d{2}"
+                   type="tel" placeholder="(212) 692-93-92">
                 </div>
               </div>
             </section>
 
             <!-- payment -->
-            <section class="payment">
+            <section class="payment" id="payment_info">
               <!-- payment details -->
-              <h3><span class="numbering">2</span>Payment Details</h3>
+              <h3><span class="numbering"><b>2</b></span>
+                Payment Details
+              <i class="icon icon-lock-filled">&nbsp;</i></h3>
 
               <!-- form fields -->
               <div class="form_fields">
                 <!-- credit card -->
                 <div class="credit_card">
                    <label for="credit_card">Credit Card Number</label>
-                   <input type="text" 
+                   <input id="credit_card" type="text" 
                     placeholder="0000-0000-0000-0000" 
                     pattern="\d{4}[\-]\d{4}[\-]\d{4}[\-]\d{4}">
                 </div>
 
                 <!-- security code -->
                 <div class="security_code">
-                  <input type="text" name="security_code" placeholder="***"
+                  <label for="security_code">Security code</label>
+                  <input type="text" id="security_code"
+                   name="security_code" placeholder="***"
                    pattern="\d{3}">
-                  <img src="" alt="testinger" 
-                   title="Last 3 digits on the back of your card">
+                   <i title="Last 3 digits from the back of your card" 
+                    class="icon icon-question-circle-o">&nbsp;</i>
                 </div>
 
                 <!-- expiration date -->
                 <div class="expiration_date">
                   <label for="expiration_date">Expiration date</label>
-                  input
-                  <input type="text" name="expiration_date" 
-                   pattern="(0[1-9]|1[012])[- /.](18|19|2.)">
+                  <input type="text" id="expiration_date" name="expiration_date" 
+                   pattern="(0[1-9]|1[012])[- /.](18|19|2\d)"
+                   placeholder="MM / YY">
                 </div>
               </div>
             </section>
 
             <!-- submit -->
-            <button type="submit"><i>&nbsp;</i>Complete Purchase</button>
+            <div class="submit">
+              <button type="submit">
+                <i class="icon icon-basket">&nbsp;</i>Complete Purchase
+              </button>
+            </div>
           </form>
 
           <!-- order details -->
           <section id="order_details">
-            <!-- order details info -->
-            <section class="order_details_info">
-              <!-- order articles -->
-              <div class="order_articles">
-                <h3>Your order</h3>
-                <!-- single article -->
-                <p class="single_article">
-                  <span class="article_name">Apple Watch Sport</span>
-                  <span class="article_price">$ 850</span>
-               </p>
+            <!-- order details wrapper -->
+            <div class="order_details_wrapper">
+              <!-- order details info -->
+              <section class="order_details_info">
+                <!-- order articles -->
+                <div class="order_articles">
+                  <h3>Your order</h3>
+                  <!-- single article -->
+                  <p class="single_article">
+                    <span class="article_name">Apple Watch Sport</span>
+                    <span class="article_price">
+                      <i class="icon icon-dollar">&nbsp;</i>850
+                    </span>
+                 </p>
 
-               <!-- single article -->
-               <p class="single_article">
-                  <span class="article_name">Modern Buckle</span>
-                  <span class="article_price">$ 380</span>
-               </p>
-              </div>
-                
-              <!-- pre calculation -->
-              <div class="pre_calc">
-                <!-- pre cost -->
-                <p class="pre_cost">
-                  <span class="pre_label">Total purchases</span>
-                  <span class="pre_price">$ 960.00</span>
-               </p>    
+                 <!-- single article -->
+                 <p class="single_article">
+                    <span class="article_name">Modern Buckle</span>
+                    <span class="article_price">
+                      <i class="icon icon-dollar">&nbsp;</i>380
+                    </span>
+                 </p>
+                </div>
+                  
+                <!-- pre calculation -->
+                <div class="pre_calc">
+                  <!-- pre cost -->
+                  <p class="pre_cost">
+                    <span class="pre_label">Total purchases</span>
+                    <span class="pre_price">
+                      <i class="icon icon-dollar">&nbsp;</i>960.00
+                    </span>
+                 </p>    
 
-               <!-- tax estimate -->
-               <p class="tax_estimate">
-                  <span class="tax_label">Estimated tax</span>
-                  <span class="tax_price">$ 0</span>
-               </p>
-              </div>
+                 <!-- tax estimate -->
+                 <p class="tax_estimate">
+                    <span class="tax_label">Estimated tax</span>
+                    <span class="tax_price">
+                      <i class="icon icon-dollar">&nbsp;</i>0
+                    </span>
+                 </p>
+                </div>
 
-              <!-- total calculation -->
-              <p class="total_calc">
-                <span class="total_calc_label">Total</span>
-                <span class="total_calc_value">$ 960</span>
-              </p>
-            </section>
+                <!-- total calculation -->
+                <p class="total_calc">
+                  <span class="total_calc_label">Total</span>
+                  <span class="total_calc_value">
+                    <i class="icon icon-dollar">&nbsp;</i>960
+                  </span>
+                </p>
+              </section>
+            </div>
+
           </section>
         </div>
         <footer class="mdl-mega-footer">

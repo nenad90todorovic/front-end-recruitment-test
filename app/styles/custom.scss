@@ -1,1 +1,460 @@
-/* CHECKOUT */
+// IMPORTS
+@import "fontello";
+
+// MIXINS
+
+// heading
+@mixin section_heading() {
+	display: flex;
+	align-items: center;
+	text-transform: uppercase;
+	font-size: 16px;
+	color: #000;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0;
+
+ 	span {
+ 		color: #fff;
+ 		background-color: #000;
+ 		font-size: 16px; 
+ 		border-radius: 50%;
+ 		width: 20px;
+ 		height: 20px;
+ 		text-align: center;
+ 		display: flex;
+ 		align-items: center;
+ 		justify-content: center;
+ 		margin-right: 10px;
+
+ 		> b {   
+			position: relative;
+			top: -1px;
+ 		}
+ 	}
+ 
+ 	i {
+ 		font-size: 18px;
+ 		color: #484848;
+ 		margin-left: 6px;
+ 	}
+}
+
+// form fields
+@mixin form_fields() {
+	padding-left: 30px;
+	padding-right: 15px;
+	margin-top: -10px;
+	
+	// fields
+	label {
+		display: block;
+		color: #515356; 
+		font-weight: 700;
+		position: relative;
+		top: 24px; 
+		left: 10px;
+		z-index: 10;
+		cursor: pointer;
+		width: calc(100% - 10px);
+	}
+	
+	input,
+	select {
+		background-color: #fff;
+		border-radius: 4px;
+		border: none;
+		outline: none;
+		border-bottom: 2px solid #dcdcdc; 
+		padding-top: 27.5px;
+		padding-bottom: 4px;
+		width: 100%;
+		text-indent: 10px;
+		font-size: 16px;
+	}
+
+	select {
+		text-indent: 10px;
+		background-color: #fff;
+		-webkit-appearance: none;
+		appearance: none;
+		background-image: url('../images/arrow_bottom.png');
+		background-repeat: no-repeat;
+		background-position: 95% center;
+		cursor: pointer;
+
+		&::ms-expand {
+			display: none;
+		}
+	}
+}	
+
+// order items
+@mixin order_items() {
+	color: #000;
+	font-size: 14px;
+	display: -ms-flexbox;
+	display: flex;
+	margin-bottom: 3px;
+	-ms-flex-align: center;
+	align-items: center;	
+
+	> span:first-child {
+		flex: 2.5;
+		line-height: unset;
+	}
+
+	> span:last-child {
+		flex: 1;
+		text-align: right;
+		line-height: normal;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+
+	i {
+		position: relative;
+		left: 1px;
+
+		&::before {
+			text-align: right;
+		}
+	}
+}
+
+// CHECKOUT TAB
+main.mdl-layout__content.checkout_wrapper {
+	background-color: #f2f2f2;	
+
+	// checkout
+	div#checkout {
+		background-color: transparent;
+		padding: 3px 0 36px 0;
+		max-width: 880px;
+		margin-left: auto;
+		margin-right: auto;	
+		width: 100%;
+		display: flex;
+
+		// checkout form
+		> #checkout_form {
+			flex: 1;
+
+			// placeholder style
+			input::-webkit-input-placeholder {
+			    color: #9b9b9b;
+			    text-indent: 10px;
+			    font-size: 16px;
+			    position: relative;
+			    left: 0;
+			    padding-left: 0;
+			    top: 0;
+			}
+
+			input:-moz-placeholder {
+			    /* FF 4-18 */
+			    color: #9b9b9b;
+			    text-indent: 10px;
+			    font-size: 16px;
+			    position: relative;
+			    left: 0;
+			    padding-left: 0;
+			    top: 0;
+			}
+
+			input::-moz-placeholder {
+			    /* FF 19+ */
+			    color: #9b9b9b;
+			    text-indent: 10px;
+			    font-size: 16px;
+			    position: relative;
+			    left: 0;
+			    padding-left: 0;
+			    top: 0;
+			}
+
+			input:-ms-input-placeholder {
+			    /* IE 10+ */
+			    color: #9b9b9b;
+			    text-indent: 10px;
+			    font-size: 16px;
+			    position: relative;
+			    left: 0;
+			    padding-left: 0;
+			    top: 0;
+			}		
+		}
+
+		// order details
+		> #order_details {
+			width: 275px;
+			padding-top: 50px;
+
+			h3 {
+				text-transform: uppercase;
+				font-size: 16px;
+				font-weight: bold;
+				color: #000;
+				margin: 0;
+			}
+			
+			// single article
+			.single_article {
+				@include order_items();
+
+				i {
+					font-size: 12px;
+				}
+			}
+
+			// pre cost
+			.pre_cost,
+			.tax_estimate {
+				@include order_items();
+			}
+
+			// total calc
+			.total_calc {
+				@include order_items();
+				margin-top: 10px;
+				margin-bottom: 32px;	
+
+
+				.total_calc_label {
+					font-weight: 700;  
+				}				
+
+				.total_calc_value {
+					font-size: 22px;
+					font-weight: 700;
+				}
+
+				.icon-dollar {
+					top: 14px;
+				}
+			}
+		}	
+
+		.order_details_wrapper {
+			border-radius: 4px;
+			background-color: #fff;
+			padding: 5px;
+		}
+
+		.order_details_info {
+			border: 1.5px dashed #dcdcdc;
+			border-radius: 4px;
+			padding: 16px 12px 0 12px;
+
+			> .order_articles {
+				margin-top: -16px;
+				padding-bottom: 18px;
+			}
+		}	
+
+		.order_articles,
+		.pre_calc {
+			border-bottom: 1.5px dashed #dcdcdc;
+		}
+
+		.pre_calc {
+			padding-top: 8px;	
+			padding-bottom: 8px;
+		}
+
+		// personal info 
+		#personal_info {
+			margin-bottom: 22px;
+
+			h3 {
+				@include section_heading();
+			}
+			
+			// form fields
+			.form_fields {
+				@include form_fields();
+
+				// first name
+				.first_name {
+					float: left;
+					width: 50%;
+					box-sizing: border-box;
+					padding-right: 5px;
+				}
+
+				// last name
+				.last_name {
+					float: right;
+					width: 50%;
+					box-sizing: border-box;
+					padding-left: 5px;
+				}
+
+				// user's email
+				.user_email {
+					clear: both;
+				}
+
+				// user's country
+				.user_country {
+					width: 50%;
+					float: left;
+					box-sizing: border-box;
+					padding-right: 5px;
+				}
+
+				// postal code
+				.postal_code {
+					width: 50%;
+					float: right;
+					box-sizing: border-box;
+					padding-left: 5px;
+				}
+
+				// phone number
+				.phone_number {
+					clear: both;
+				}
+			}
+		}	
+
+		// payment info
+		#payment_info {
+			h3 {
+				@include section_heading();
+			}
+
+			// form fields
+			.form_fields {
+				@include form_fields();	
+
+				// credit card number
+				label[for = 'credit_card']::after {
+					content: url('../images/visa_card.png');
+					border: 1px solid #dcdcdc;
+					border-radius: 4px;
+					float: right;
+					padding-left: 5px;
+					padding-right: 5px;
+					position: relative;
+					top: 12px;
+					right: 12px;
+				}
+
+				// security code
+				.security_code {
+					width: 50%;
+					float: left;
+					box-sizing: border-box;
+					padding-right: 5px;
+				}
+
+				.icon-question-circle-o {
+					position: relative;
+					top: -36px;
+					left: -13px;
+					display: inline;	
+					width: 20px;
+					float: right;
+					text-align: center;
+					height: 20px;
+					cursor: pointer;
+					z-index: 30;
+
+					&::before {
+						content: '\e803';
+						font-family: 'Fontello';
+						color: #dcdcdc;	
+						font-size: 12px;
+						font-weight: 100;
+						border: 1px solid #dcdcdc;
+						border-radius: 50%;
+						text-align: center;
+						padding: 3px;
+					}
+				}
+
+				// expiration date
+				.expiration_date {
+					width: 50%;
+					float: right;
+					box-sizing: border-box;
+					padding-left: 5px;
+				}
+			}
+		} 
+
+		// submit
+		.submit {
+			> button {
+				border-radius: 4px;
+				border: none;
+				outline: none;
+				border-bottom: 2px solid #5cb204; 
+				width: calc(100% - 45px);
+				font-size: 16px;
+				margin-left: 30px;
+				padding-top: 17px;
+				padding-bottom: 17px;
+				color: #fff;
+				background-color: rgba(107, 212, 0, 1);
+				cursor: pointer;
+				transition: background-color .4s;
+				display: block;
+
+				&:hover {
+					background-color: rgba(107, 212, 0, .8);
+				}
+			}
+
+			.icon {
+				margin-right: 8px;
+			}
+		}
+	}
+}
+
+// FIREFOX BUG FIXING
+@-moz-document url-prefix() {
+	main.mdl-layout__content.checkout_wrapper 
+	div#checkout #personal_info .form_fields select {
+		text-indent: 3px;
+		padding-top: 25px;
+	}	
+
+	main.mdl-layout__content.checkout_wrapper 
+	div#checkout #payment_info .form_fields 
+	.icon-question-circle-o {
+		left: -10px;
+	}
+}
+
+// EDGE BUG FIXING
+@supports (-ms-ime-align: auto) {
+	main.mdl-layout__content.checkout_wrapper 
+	div#checkout #personal_info .form_fields input,
+	main.mdl-layout__content.checkout_wrapper 
+	div#checkout #payment_info .form_fields input {
+		text-indent: 1px;
+		padding-left: 7px;
+	}
+
+	main.mdl-layout__content.checkout_wrapper 
+	div#checkout #personal_info .form_fields select {
+		text-indent: 0;
+		padding-left: 7px;
+		padding-top: 25px;
+	}
+
+	main.mdl-layout__content.checkout_wrapper div#checkout 
+	#personal_info .form_fields .first_name,
+	main.mdl-layout__content.checkout_wrapper div#checkout 
+	#payment_info .form_fields .security_code {
+		padding-right: 10px;
+	}	
+
+	main.mdl-layout__content.checkout_wrapper div#checkout .submit > button {
+		width: calc(100% - 40px);
+	}	
+}
